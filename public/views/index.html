@@ -1,0 +1,42 @@
+<!-- index.html -->
+<!doctype html>
+
+<!-- ASSIGN OUR ANGULAR MODULE -->
+<html ng-app="practicePortal">
+<head>
+    <!-- META -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Optimize mobile viewport -->
+
+    <title>Wiki</title>
+
+    <!-- SCROLLS -->
+    <link rel="stylesheet" href="stylesheets/bootstrap.min.css"><!-- load bootstrap -->
+    <link rel="stylesheet" type="text/css" href="stylesheets/custom.css">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Bitter">
+    <!-- <link href="/stylesheets/simple-sidebar.css" rel="stylesheet"> -->
+
+    <!-- SPELLS -->
+    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js">
+    </script><!-- load angular -->
+    <script src="//rawgithub.com/GoDisco/ngFacebook/master/ngFacebook.js"></script>
+    <script type="text/javascript" src="/javascripts/main.js"></script>
+
+</head>
+
+<body ng-controller="DemoCtrl">
+        <div class="container">
+            <h4>
+                {{welcomeMsg}}
+            </h4>
+            <button type="button" ng-click="login()" ng-hide="isLoggedIn" class="btn btn-default navbar-btn">
+                Login
+            </button>
+        </div>
+        <div id="fb-root">
+        </div>
+    </body>
+</html>
