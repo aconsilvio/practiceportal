@@ -23,27 +23,29 @@ angular.module('practicePortal', ['ngFacebook'])
      // Insert the Facebook JS SDK into the DOM
      firstScriptElement.parentNode.insertBefore(facebookJS, firstScriptElement);
    }());
-})
+});
 
-;
-
-var DemoCtrl = function ($scope, $facebook) {
-  $scope.isLoggedIn = false;
-  $scope.login = function() {
-    $facebook.login().then(function() {
-      refresh();
-    });
-  }
+var DemoCtrl = function ($scope, $facebook, $http) {
+  var feed = [];
   function refresh() {
-    $facebook.api("/me").then( 
+    $facebook.api("/191813164601019/videos").then( 
       function(response) {
-        $scope.welcomeMsg = "Welcome " + response.name;
-        $scope.isLoggedIn = true;
+        console.log(response)
+        $scope.feedRaw = response;
+        for (var i = 0; i < $scope.feedRaw.data.length; i++){
+          $facebook.api("/"+ $scope.feedRaw.data[i].id).then(
+            function(res){
+              console.log(res.id)
+              feed.push("https://www.facebook.com/video/embed?video_id="+res.id)
+            })
+          $scope.feed = feed
+        }
       },
       function(err) {
         $scope.welcomeMsg = "Please log in";
       });
   }
+
   
   refresh();
 };

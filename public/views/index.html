@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Optimize mobile viewport -->
 
-    <title>Wiki</title>
+    <title>Practice Portal</title>
 
     <!-- SCROLLS -->
     <link rel="stylesheet" href="stylesheets/bootstrap.min.css"><!-- load bootstrap -->
@@ -29,12 +29,10 @@
 
 <body ng-controller="DemoCtrl">
         <div class="container">
-            <h4>
-                {{welcomeMsg}}
-            </h4>
-            <button type="button" ng-click="login()" ng-hide="isLoggedIn" class="btn btn-default navbar-btn">
-                Login
-            </button>
+            <div class="flex-item" ng-repeat="content in feed">
+              <iframe src={{content}} width=\"1280\" height=\"720\" frameborder=\"0\"></iframe>
+             </div>
+              
         </div>
         <div id="fb-root">
         </div>
