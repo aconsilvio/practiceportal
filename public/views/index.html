@@ -13,7 +13,7 @@
 
     <!-- SCROLLS -->
     <link rel="stylesheet" href="stylesheets/bootstrap.min.css"><!-- load bootstrap -->
-    <link rel="stylesheet" type="text/css" href="stylesheets/custom.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/main.css">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Bitter">
     <!-- <link href="/stylesheets/simple-sidebar.css" rel="stylesheet"> -->
 
@@ -30,7 +30,8 @@
 <body ng-controller="DemoCtrl">
         <div class="container">
             <div class="flex-item" ng-repeat="content in feed">
-              <iframe src={{content}} width=\"1280\" height=\"720\" frameborder=\"0\"></iframe>
+              <iframe src =
+              "https://www.facebook.com/video/embed?video_id= {{content.id}}" width=\"1280\" height=\"720\" frameborder=\"0\"></iframe>
              </div>
               
         </div>

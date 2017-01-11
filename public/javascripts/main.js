@@ -27,24 +27,52 @@ angular.module('practicePortal', ['ngFacebook'])
 
 var DemoCtrl = function ($scope, $facebook, $http) {
   var feed = [];
-  function refresh() {
-    $facebook.api("/191813164601019/videos").then( 
+  var groupIDs = ["687498148076618", "222774521466864", "1517819058276334", "158881161246610", "1144863825582537", "1137083516407421", "363584057367097", "353600324976899", "1230747207018937", "224802994614669", "1435519730079849", "760242687459625", "1032810963489791", "1627655720873882", "1631363607173492", "205198266611379", "661301877370767"]
+  var groupInstruments = ["voice", "tuba", "sax", "oboe", "trombome", "bassoon", "clarinet", "guitar", "piano", "flute", "viola", "cello", "bass", "precussion", "trumpet", "french horn", "violin"]
+  
+  function toObject(names, values) {
+    var result = {};
+    for (var i = 0; i < names.length; i++)
+         result[names[i]] = values[i];
+    return result;
+  }
+  
+  var idDict = toObject(groupInstruments, groupIDs)
+  
+  function getVideos(groupID){
+    $facebook.api("/"+ groupID + "/videos").then( 
+      // call to main group of pp
       function(response) {
-        console.log(response)
         $scope.feedRaw = response;
         for (var i = 0; i < $scope.feedRaw.data.length; i++){
           $facebook.api("/"+ $scope.feedRaw.data[i].id).then(
             function(res){
-              console.log(res.id)
-              feed.push("https://www.facebook.com/video/embed?video_id="+res.id)
+              feed.push(res);
             })
-          $scope.feed = feed
+          
         }
       },
       function(err) {
         $scope.welcomeMsg = "Please log in";
       });
   }
+
+  function refresh() {
+    for(var key in idDict){
+      getVideos(idDict[key])
+    }
+
+    $scope.feed = feed;
+
+  // $scope.feed = feed.sort(function(a, b) {
+  //   return parseFloat(a.updated_time) - parseFloat(b.updated_time);
+  // }).slice(0,6);
+
+  for(var k = 0; k < $scope.feed.length; k++){
+    console.log($scope.feed[k].updated_time)
+  }
+  }
+
 
   
   refresh();
