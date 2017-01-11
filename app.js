@@ -2,7 +2,7 @@
 
 var mongoose = require('mongoose'); 
 var express = require('express');
-// var wiki = require('./routes/wikis');
+var videos = require('./routes/videos');
 var app = express();
 
 var morgan = require('morgan');             // log requests to the console (express4)
@@ -42,9 +42,13 @@ app.get('/', function(req, res){
 // app.post('/api/header/:title', wiki.updateWikiPOST);
 // app.post('/api/createNew', wiki.saveNewWikiPOST);
 // app.get('*', wiki.catchAnything);
-
+var mongoURI = process.env.MONGO_URI || "mongodb://localhost/test";
+console.log(mongoURI)
+mongoose.connect(mongoURI);
 
 //port set up
+
+app.post('/createDB', videos.createDB)
 
 var PORT = process.env.PORT || 3000;
     app.listen(PORT, function() {

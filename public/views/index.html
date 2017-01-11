@@ -29,10 +29,11 @@
 
 <body ng-controller="DemoCtrl">
         <div class="container">
-            <div class="flex-item" ng-repeat="content in feed">
+            <!-- <div class="flex-item" ng-repeat="content in feed">
               <iframe src =
               "https://www.facebook.com/video/embed?video_id= {{content.id}}" width=\"1280\" height=\"720\" frameborder=\"0\"></iframe>
-             </div>
+             </div> -->
+             <button ng-click="createDB()">create db</button>
               
         </div>
         <div id="fb-root">

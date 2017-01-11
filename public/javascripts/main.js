@@ -37,7 +37,7 @@ var DemoCtrl = function ($scope, $facebook, $http) {
     return result;
   }
   
-  var idDict = toObject(groupInstruments, groupIDs)
+  var idDict = toObject(groupIDs, groupInstruments)
   
   function getVideos(groupID){
     $facebook.api("/"+ groupID + "/videos").then( 
@@ -47,6 +47,7 @@ var DemoCtrl = function ($scope, $facebook, $http) {
         for (var i = 0; i < $scope.feedRaw.data.length; i++){
           $facebook.api("/"+ $scope.feedRaw.data[i].id).then(
             function(res){
+              res.instrument = idDict[groupID]
               feed.push(res);
             })
           
@@ -59,7 +60,7 @@ var DemoCtrl = function ($scope, $facebook, $http) {
 
   function refresh() {
     for(var key in idDict){
-      getVideos(idDict[key])
+      getVideos(key)
     }
 
     $scope.feed = feed;
@@ -68,9 +69,18 @@ var DemoCtrl = function ($scope, $facebook, $http) {
   //   return parseFloat(a.updated_time) - parseFloat(b.updated_time);
   // }).slice(0,6);
 
-  for(var k = 0; k < $scope.feed.length; k++){
-    console.log($scope.feed[k].updated_time)
+  
   }
+
+  $scope.createDB = function (){
+    $http.post("/createDB", {content: $scope.feed})
+      .success(function(data){
+        console.log(data)
+        console.log("database added")
+      })
+      .error(function(data){
+        console.log("fails")
+      })
   }
 
 
