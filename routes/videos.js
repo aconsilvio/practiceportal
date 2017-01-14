@@ -8,105 +8,76 @@ var Video = require(path.join(__dirname,'../models/videoModel'));
 video = {}; 
 
 //This function only needs to be called one time to set up the
+
 // video.createDB = function(req, res){
 // 	var currentFeed = req.body.content;
 // 	console.log(currentFeed)
 
 // 	for(var video in currentFeed){
 // 		console.log(currentFeed)
-// 		Video.create({
-// 			facebookID:currentFeed[video].id, 
-// 			instrument: currentFeed[video].instrument, 
-// 			description: currentFeed[video].description, 
-// 			time: currentFeed[video].updated_time
-// 		}), function(err, new1){
-// 			if(err) return res.status(500);
-// 			res.json({new1:new1})
-// 		}
+		// Video.create({
+		// 	facebookID:currentFeed[video].id, 
+		// 	instrument: currentFeed[video].instrument, 
+		// 	description: currentFeed[video].description, 
+		// 	time: currentFeed[video].updated_time
+		// }), function(err, new1){
+		// 	if(err) return res.status(500);
+		// 	res.json({new1:new1})
+		// }
 // 	}
 
 // }
 
-// video.home = function(req, res){ 
-// 	//Input: req, res objects 
-// 	//Output: sends error if error and sends json of wiki list to front end 
+video.getAllVideos = function(req, res){
+	Video.find({}, function(err, videos){
+		res.json(videos);
+	})
+}
+
+video.getNewVideos = function(req, res){
+	var videoNew = req.body.content;
+	Video.find({facebookID:videoNew.id}, function(err, videoObj){
+		if(err) res.sendStatus(500)
+		if(videoObj.length == 0){
+			Video.create({
+					facebookID:videoNew.id, 
+					instrument: videoNew.instrument, 
+					description: videoNew.description, 
+					time: videoNew.updated_time
+				}), function(err, new1){
+					if(err) return res.status(500);
+					console.log(new1, "new vid")
+					Video.find({}, function(err, allVids){
+						res.json(allVids)
+					})
+				}
+			} else {
+				Video.find({}, function(err, allVids){
+						res.json(allVids)
+					})
+			}	
+	})
+}
+
 	
-// 	//find all wikis and load homepage with list of titles in database
-// 	Wiki.find({}, function(err, wikiList){
-// 		if(err){
-// 			res.send(err);
-// 		}
-// 		res.json(wikiList);
-// 	})
-// };
+	// for(var video in videoFeed){
+	// 	console.log(videoFeed[video].id, "undef?")
+	// 	Video.find({facebookID:videoFeed[video].id}, function(err, videoNew){
+	// 		if(err) res.sendStatus(500);
+	// 		console.log(videoNew, "videoNew")
+	// 		if(video == null){
+	// 			Video.create({
+	// 				facebookID:videoFeed[video].id, 
+	// 				instrument: videoFeed[video].instrument, 
+	// 				description: videoFeed[video].description, 
+	// 				time: videoFeed[video].updated_time
+	// 			}), function(err, new1){
+	// 				if(err) return res.status(500);
+	// 			}
+	// 		}
+	// 	})
+	// }
 
-// video.loadPageGET = function(req, res){
-// 	//Input: req, res objects 
-// 	//Output: sends error if error finding wiki object. Else sends json object of selected wiki
-// 	//selected wiki is determined by a parameter in the route
-
-// 	var header = req.params.title;
-	
-// 	//find wiki object
-// 	Wiki.findOne({header:header}, function(err, wikiContent){
-// 		if(err){
-// 			res.send(err);
-// 		}
-
-// 		//json object to load page of a specific title
-// 		res.json(wikiContent);
-// 	})
-// };
-
-// video.updateWikiPOST = function(req, res){
-// 	//Input: req, res objects
-// 	//Output: sends json objects of all wiki objects to display in side bar and updated wiki object to show updated wiki page
-
-// 	//original header from the original route called
-// 	var oldHeader = req.params.title;
-
-// 	//new header and content retrieved from form
-// 	var newHeader = req.body.header;
-// 	var newContent = req.body.content;
-
-// 	//update database entry with new content
-// 	Wiki.update({header:oldHeader}, {$set: {header:newHeader, content: newContent}}, function(err, record){
-// 			Wiki.findOne({header:newHeader}, function(err, updatedObj){
-// 				Wiki.find({}, function(err, listAll){
-
-// 					//send new content and list of all objects back to front-end
-// 					res.json({mainWiki:updatedObj, all:listAll})
-// 				})
-// 			})
-// 	})
-// };
-
-// video.saveNewWikiPOST  = function(req, res){
-// 	//Input: req, res objects
-// 	//Output: sends json objects of all wiki objects to display in side bar and new wiki object
-
-// 	var w = new Wiki({header: req.body.header, content: req.body.content}); 
-
-// 	//update database with new wiki
-// 	w.save(function(err){ 
-// 		if(err){ 
-// 			res.send("There has been an error saving the wiki")
-// 		}
-
-// 		//send all wikis along with new wiki back to front end
-// 		Wiki.find({}, function(err, allWikis){
-// 			res.json({all:allWikis, newWiki: w}); 
-// 		})
-// 	});
-
-
-// }
-
-// video.catchAnything = function(req, res){ 
-// 	//Input: req, res objects
-// 	//Output: error message
-// 	res.send("There was an error.")
-// }
 
 
 module.exports = video;

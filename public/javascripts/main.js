@@ -27,8 +27,8 @@ angular.module('practicePortal', ['ngFacebook'])
 
 var DemoCtrl = function ($scope, $facebook, $http) {
   var feed = [];
-  var groupIDs = ["687498148076618", "222774521466864", "1517819058276334", "158881161246610", "1144863825582537", "1137083516407421", "363584057367097", "353600324976899", "1230747207018937", "224802994614669", "1435519730079849", "760242687459625", "1032810963489791", "1627655720873882", "1631363607173492", "205198266611379", "661301877370767"]
-  var groupInstruments = ["voice", "tuba", "sax", "oboe", "trombome", "bassoon", "clarinet", "guitar", "piano", "flute", "viola", "cello", "bass", "precussion", "trumpet", "french horn", "violin"]
+  var groupIDs = ["687498148076618", "222774521466864", "1517819058276334", "158881161246610", "1144863825582537", "1137083516407421", "363584057367097", "353600324976899", "1230747207018937", "224802994614669", "1435519730079849", "760242687459625", "1032810963489791", "1627655720873882", "1631363607173492", "205198266611379", "661301877370767", "1115432718579904"]
+  var groupInstruments = ["voice", "tuba", "sax", "oboe", "trombome", "bassoon", "clarinet", "guitar", "piano", "flute", "viola", "cello", "bass", "precussion", "trumpet", "french horn", "violin", "sister"]
   
   function toObject(names, values) {
     var result = {};
@@ -39,18 +39,18 @@ var DemoCtrl = function ($scope, $facebook, $http) {
   
   var idDict = toObject(groupIDs, groupInstruments)
   
-  function getVideos(groupID){
+  function getNewVideos(groupID){
     $facebook.api("/"+ groupID + "/videos").then( 
-      // call to main group of pp
       function(response) {
         $scope.feedRaw = response;
         for (var i = 0; i < $scope.feedRaw.data.length; i++){
           $facebook.api("/"+ $scope.feedRaw.data[i].id).then(
             function(res){
               res.instrument = idDict[groupID]
+              res.realtime = new Date(res.updated_time)
+              res.updated_time = new Date(res.updated_time).getTime()
               feed.push(res);
             })
-          
         }
       },
       function(err) {
@@ -60,32 +60,63 @@ var DemoCtrl = function ($scope, $facebook, $http) {
 
   function refresh() {
     for(var key in idDict){
-      getVideos(key)
+      getNewVideos(key)
     }
 
-    $scope.feed = feed;
+  $scope.newFeed = feed;
 
-  // $scope.feed = feed.sort(function(a, b) {
-  //   return parseFloat(a.updated_time) - parseFloat(b.updated_time);
-  // }).slice(0,6);
-
-  
   }
 
-  $scope.createDB = function (){
-    $http.post("/createDB", {content: $scope.feed})
-      .success(function(data){
-        console.log(data)
-        console.log("database added")
-      })
-      .error(function(data){
-        console.log("fails")
-      })
-  }
+  // $scope.createDB = function (){
+  //   $http.post("/createDB", {content: $scope.feed})
+  //     .success(function(data){
+  //       console.log(data)
+  //       console.log("database added")
+  //     })
+  //     .error(function(data){
+  //       console.log("fails")
+  //     })
+  // }
 
 
-  
-  refresh();
+
+
+  $http.get("/")
+    .success(function(data){
+      $http.get("/getAllVideos")
+        .success(function(data){
+          $scope.feed = data;
+          refresh();
+        })
+        .error(function(data){
+          console.log("error")
+        })
+
+    })
+    .error(function(data){
+      console.log("err")
+    })
+
+  $scope.getNewFunc = function(){
+    for(var video in $scope.newFeed){
+      $http.post("/getNewVideos", {content: $scope.newFeed[video]})
+          .success(function(data1){
+            console.log("new videos added")
+            $http.get("/getAllVideos")
+              .success(function(data){
+                $scope.feed = data;
+                refresh();
+              })
+              .error(function(data){
+                console.log("error")
+              })
+          })
+          .error(function(data1){
+            console.log("err");
+          })
+      }
+    }
+
 };
 
 
