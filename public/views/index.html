@@ -40,10 +40,10 @@
              </div>
              <label>Search: <input ng-model="searchText"></label>
 
-              <div ng-repeat="content in newFeed | filter:searchText">
+              <div ng-repeat="content in videoFeed | filter:searchText |limitTo:numVideos">
               {{content}}
               </div>
-              <button ng-click="goLive()">Go Live</button>
+              <button ng-click="numVideos = numVideos + 10">Load more</button>
         </div>
         <div id="fb-root">
         </div>
