@@ -38,8 +38,9 @@
              <div ng-repeat="instrument in groupInstruments">
                 <button ng-click="setInstrument(instrument)">{{instrument}}</button>
              </div>
+             <label>Search: <input ng-model="searchText"></label>
 
-              <div ng-repeat="content in newFeed">
+              <div ng-repeat="content in newFeed | filter:searchText">
               {{content}}
               </div>
         </div>
