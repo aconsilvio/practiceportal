@@ -48,9 +48,9 @@ mongoose.connect(mongoURI);
 
 //port set up
 
-app.post('/createDB', videos.createDB)
-app.post('/getNewVideos', videos.getNewVideos)
-app.get("/getAllVideos", videos.getAllVideos)
+// app.post('/createDB', videos.createDB)
+// app.post('/getNewVideos', videos.getNewVideos)
+// app.get("/getAllVideos", videos.getAllVideos)
 
 var PORT = process.env.PORT || 3000;
     app.listen(PORT, function() {
