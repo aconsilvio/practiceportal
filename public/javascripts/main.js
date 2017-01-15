@@ -44,7 +44,7 @@ var DemoCtrl = function ($scope, $facebook, $http) {
       function(response) {
         $scope.feedRaw = response;
         for (var i = 0; i < $scope.feedRaw.data.length; i++){
-          $facebook.api("/"+ $scope.feedRaw.data[i].id).then(
+          $facebook.api("/"+ $scope.feedRaw.data[i].id +"?fields=from,description,updated_time,embed_html,length,picture").then(
             function(res){
               res.instrument = idDict[groupID]
               res.realtime = new Date(res.updated_time)
@@ -76,6 +76,28 @@ var DemoCtrl = function ($scope, $facebook, $http) {
     feed = [];
     getVideos(nameDict[instrument])
     $scope.newFeed = feed;
+  }
+
+  $scope.goLive = function(group){
+    FB.ui({
+      display: 'iframe',
+      method: 'live_broadcast',
+      phase: 'create',
+  }, function(response) {
+      if (!response.id) {
+        alert('dialog canceled');
+        return;
+      }
+      alert('stream url:' + response.secure_stream_url);
+      FB.ui({
+        display: 'iframe',
+        method: 'live_broadcast',
+        phase: 'publish',
+        broadcast_data: response,
+      }, function(response) {
+      alert("video status: \n" + response.status);
+      });
+    });
   }
 
   $http.get("/")
