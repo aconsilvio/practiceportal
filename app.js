@@ -48,7 +48,7 @@ mongoose.connect(mongoURI);
 
 //port set up
 
-// app.post('/createDB', videos.createDB)
+app.post('/createDB', videos.createDB)
 app.post('/getNewVideos', videos.getNewVideos)
 app.get("/getAllVideos", videos.getAllVideos)
 

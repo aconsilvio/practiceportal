@@ -63,20 +63,21 @@ var DemoCtrl = function ($scope, $facebook, $http) {
       getNewVideos(key)
     }
 
-  $scope.newFeed = feed;
+    $scope.newFeed = feed;
 
   }
 
-  // $scope.createDB = function (){
-  //   $http.post("/createDB", {content: $scope.feed})
-  //     .success(function(data){
-  //       console.log(data)
-  //       console.log("database added")
-  //     })
-  //     .error(function(data){
-  //       console.log("fails")
-  //     })
-  // }
+  $scope.createDB = function (){
+    refresh()
+    $http.post("/createDB", {content: $scope.newFeed})
+      .success(function(data){
+        console.log(data)
+        console.log("database added")
+      })
+      .error(function(data){
+        console.log("fails")
+      })
+  }
 
 
 
@@ -98,23 +99,24 @@ var DemoCtrl = function ($scope, $facebook, $http) {
     })
 
   $scope.getNewFunc = function(){
-    for(var video in $scope.newFeed){
-      $http.post("/getNewVideos", {content: $scope.newFeed[video]})
+    console.log("clicked")
+      $http.post("/getNewVideos", {content: $scope.newFeed})
           .success(function(data1){
             console.log("new videos added")
-            $http.get("/getAllVideos")
-              .success(function(data){
-                $scope.feed = data;
-                refresh();
-              })
-              .error(function(data){
-                console.log("error")
-              })
+            $scope.feed = data1;
+            // $http.get("/getAllVideos")
+            //   .success(function(data){
+            //     $scope.feed = data;
+            //     refresh();
+            //   })
+            //   .error(function(data){
+            //     console.log("error")
+            //   })
           })
           .error(function(data1){
             console.log("err");
           })
-      }
+      
     }
 
 };
