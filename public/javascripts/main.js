@@ -27,7 +27,7 @@ angular.module('practicePortal', ['ngFacebook'])
 
 var DemoCtrl = function ($scope, $facebook, $http, $window) {
   var feed = [];
-  $scope.numVideos = 10;
+  $scope.numVideos = 9;
   $scope.isLoggedIn = false;
   var groupIDs = ["687498148076618", "222774521466864", "1517819058276334", "158881161246610", "1144863825582537", "1137083516407421", "363584057367097", "353600324976899", "1230747207018937", "224802994614669", "1435519730079849", "760242687459625", "1032810963489791", "1627655720873882", "1631363607173492", "205198266611379", "661301877370767", "1115432718579904"]
   $scope.groupInstruments = ["voice", "tuba", "sax", "oboe", "trombome", "bassoon", "clarinet", "guitar", "piano", "flute", "viola", "cello", "bass", "precussion", "trumpet", "french horn", "violin", "sister"]
@@ -46,7 +46,7 @@ var DemoCtrl = function ($scope, $facebook, $http, $window) {
       function(response) {
         $scope.feedRaw = response;
         for (var i = 0; i < $scope.feedRaw.data.length; i++){
-          $facebook.api("/"+ $scope.feedRaw.data[i].id +"?fields=comments{from,attachment,id,message,created_time},from,description,updated_time,embed_html,length,picture,title").then(
+          $facebook.api("/"+ $scope.feedRaw.data[i].id +"?fields=comments{from,attachment,id,message,created_time},from,description,updated_time,permalink_url,length,picture,title").then(
             function(res){
               res.instrument = idDict[groupID]
               res.realtime = new Date(res.updated_time)
@@ -70,13 +70,13 @@ var DemoCtrl = function ($scope, $facebook, $http, $window) {
   }
 
   $scope.getAllVideos = function(){
-    $scope.numVideos = 10
+    $scope.numVideos = 9
     feed = [];
     refresh()
   }
 
   $scope.setInstrument = function(instrument){
-    $scope.numVideos = 10
+    $scope.numVideos = 9
     feed = [];
     getVideos(nameDict[instrument])
     $scope.videoFeed = feed;
