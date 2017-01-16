@@ -31,10 +31,10 @@ app.use(methodOverride());
 
 
 //routes 
-
 app.get('/', function(req, res){
-    res.sendfile('public/views/index.html');
-});
+  res.sendfile('public/views/index.html')
+})
+
 
 
 // app.get('/api/home', wiki.home);
