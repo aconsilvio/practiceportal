@@ -90,6 +90,12 @@ var DemoCtrl = function ($scope, $facebook, $http, $window) {
     })
   }
 
+  $scope.logout = function(){
+    $facebook.logout().then(function(res){
+      $scope.isLoggedIn = false;
+    })
+  }
+
   
   $http.get("/")
     .success(function(data){
