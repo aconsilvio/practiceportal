@@ -30,20 +30,12 @@ body{
   display: flex; /* or inline-flex */
   flex-wrap: wrap;
   justify-content: center;
-  padding-left: 6em;
-  padding-right: 6em;
-  background-color: #ebebeb
-}
-
-.videoDiv{
-	margin: .75em;
-	background-color: #fff;
-	max-width: 270px;
-
 }
 
 .bottom{
 	display: flex;
+	flex-direction: column;
+	align-items: center;
 	justify-content: center;
 
 }
@@ -71,6 +63,7 @@ body{
 	color: #8e8e8e;
 	margin-left: 2em;
 	text-decoration: none;
+	letter-spacing: .05em;
 }
 
 .instrument-links{
@@ -78,17 +71,20 @@ body{
 	margin-left: 2em;
 	padding: 1.25em;
 	text-decoration: none;
-
+	letter-spacing: .05em;
 }
 
 .instrument-links:hover{
 	background-color: #46328c;
 	color: #ffffff;
 	text-decoration: none;
+	letter-spacing: .05em;
+
 }
 
 .instrument-links:focus{
 	background-color: #46328c;
+	letter-spacing: .05em;
 	color: #ffffff;
 	text-decoration: none;
 	border-bottom: 1px solid #46328c;
@@ -109,6 +105,8 @@ body{
 	width: 12em;
 	font-size: 1em;
 	height: 2em;
+	letter-spacing: .1em;
+
 }
 
 .instrument-nav{
@@ -187,6 +185,20 @@ h2{
 	display: flex;
 }
 
+#videoLoad{
+	position: relative;
+	height: 11em;
+	width: 16em;
+
+}
+
+.videoDiv{
+	margin: .75em;
+	background-color: #fff;
+	max-width: 16em;
+
+}
+
 .videoText{
 	padding-left: 1em;
 	padding-right: 1em;
@@ -197,3 +209,38 @@ h2{
 	color:#8e8e8e;
 }
 
+.overlay_text{
+	position: absolute;
+	background-color: #46328c;
+	color: #fff;
+	font-size: .7em;
+	padding: .5em;
+	bottom: 0px;
+	left: 15em;
+	letter-spacing: .1em;
+}
+
+.videoHeaders{
+	background-color: #46328c;
+	color: #fff;
+	font-size: 1em;
+	padding: .5em;
+	margin-top: 1em;
+	margin-bottom: 1em;
+	margin-left: 3em;
+
+}
+
+.mainPage{
+	padding-left: 6em;
+	padding-right: 6em;
+	padding-top: 1em;
+	padding-bottom: 2em;
+    background-color: #ebebeb
+}
+.loading{
+	color: #46328c;
+	font-family: 'CooperHewittBook';
+	text-decoration: none;
+	padding-top: 1em;
+}

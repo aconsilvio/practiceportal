@@ -47,39 +47,46 @@
                 <a href="#" ng-click="setInstrument(instrument)">{{instrument}}</a>
                 </div>
         </div>
-        <div class="container">
-             <div ng-show="!isLoggedIn">
-               Please Log In to Facebook.
-               <button ng-click = "login()">Log In</button>
+        <div class="mainPage">
+          <span class="videoHeaders">recent videos</span>
+            <div class="container">
+                 <div ng-show="!isLoggedIn">
+                   Please Log In to Facebook.
+                   <button ng-click = "login()">Log In</button>
 
-             </div>
-             
-           
-              <div class="videoDiv" ng-repeat="content in videoFeed | filter:searchText | orderBy:'-realtime' |limitTo:numVideos " ng-show="!oneVideo">
-              <iframe src="https://www.facebook.com/video/embed?video_id={{content.id}}" frameborder="0" width="270" height="180"></iframe>
-              <div class = "videoText">
-              <h2>{{content.description}}</h2>
-              {{content.from.name}} | {{content.timeSince}}
-              <button ng-click="viewFull(content.id, content.instrument)">View Full Post</button>
-              </div>
+                 </div>
+                 
+                  <div ng-click="viewFull(content.id, content.instrument)" class="videoDiv" ng-repeat="content in videoFeed | filter:searchText | orderBy:'-realtime' |limitTo:numVideos " ng-show="!oneVideo">
+                    <div id="videoLoad" ng-click="iframe=true"  style="background-image:url({{content.picture}}); background-size:cover; background-position:center">  
+                    <span class="overlay_text" style="z-index: 3;">{{content.length}}</span>
+                    </div>
+                    <!-- <iframe src="https://www.facebook.com/video/embed?video_id={{content.id}}?autoplay=1" frameborder="0" width="270" height="180" ng-show="iframe"></iframe> -->
+                    <div class = "videoText">
+                    <h2>{{content.description}}</h2>
+                    {{content.from.name}} | {{content.timeSince}}
+                    </div>
+                  </div>
 
-              
-              </div>
-              <div ng-show="oneVideo">
-                <iframe src="https://www.facebook.com/video/embed?video_id={{mainVideo.id}}" frameborder="0" width="500" height="320"></iframe>
-                <h2>{{mainVideo.description}}</h2>
-                <p>{{mainVideo.from.name}}</p>
-                <hr>
-                <div ng-repeat="comment in mainVideo.comments.data">
-                {{comment.message}} - {{comment.from.name}}
-                </div>
-              </div>
+                  <div ng-show="oneVideo">
+                    <iframe src="https://www.facebook.com/video/embed?video_id={{mainVideo.id}}" frameborder="0" width="500" height="320"></iframe>
+                    <h2>{{mainVideo.description}}</h2>
+                    <p>{{mainVideo.from.name}}</p>
+                    <hr>
+                    <div ng-repeat="comment in mainVideo.comments.data">
+                    {{comment.message}} - {{comment.from.name}}
+                    </div>
+                  </div>
 
-        </div>
-        <div class="bottom">
-          <button ng-click="numVideos = numVideos + 4" ng-hide="oneVideo">Load more</button>
+            </div>
+        <div class="bottom" ng-click="numVideos = numVideos + 8">
+          <a href="" ng-click="numVideos = numVideos + 8" ng-hide="oneVideo" class="loading">load more</a>
+          <svg href="" fill="#46328c" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/>
+            <path d="M0 0h24v24H0z" fill="none"/>
+        </svg>
         <div id="fb-root"></div>
          
+        </div>
         </div>
         <div class="footer">
           <div class="footer-left">
