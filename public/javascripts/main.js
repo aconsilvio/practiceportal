@@ -27,7 +27,8 @@ angular.module('practicePortal', ['ngFacebook'])
 
 var DemoCtrl = function ($scope, $facebook, $http, $window) {
   var feed = [];
-  $scope.numVideos = 9;
+  var numVideos = 8;
+  $scope.numVideos = numVideos;
   $scope.isLoggedIn = false;
   var groupIDs = ["687498148076618", "222774521466864", "1517819058276334", "158881161246610", "1144863825582537", "1137083516407421", "363584057367097", "353600324976899", "1230747207018937", "224802994614669", "1435519730079849", "760242687459625", "1032810963489791", "1627655720873882", "1631363607173492", "205198266611379", "661301877370767", "1115432718579904"]
   $scope.groupInstruments = ["voice", "tuba", "sax", "oboe", "trombome", "bassoon", "clarinet", "guitar", "piano", "flute", "viola", "cello", "bass", "precussion", "trumpet", "french horn", "violin", "sister"]
@@ -64,19 +65,26 @@ var DemoCtrl = function ($scope, $facebook, $http, $window) {
     for(var key in idDict){
       getVideos(key)
     }
-
-    $scope.videoFeed = feed;
+    $scope.oneVideo = false;
+    $scope.videoFeed = feed.sort(function(a,b){
+      // a = parseInt(a.updated_time)
+      // b = parseInt(b.updated_time)
+      return b-a
+    });
 
   }
 
   $scope.getAllVideos = function(){
-    $scope.numVideos = 9
+    $scope.oneVideo = false;
+    $scope.numVideos = numVideos;
     feed = [];
     refresh()
   }
 
   $scope.setInstrument = function(instrument){
-    $scope.numVideos = 9
+    $scope.oneVideo = false;
+    $scope.numVideos = numVideos
+    $scope.currentInstrument = instrument;
     feed = [];
     getVideos(nameDict[instrument])
     $scope.videoFeed = feed;
@@ -94,6 +102,17 @@ var DemoCtrl = function ($scope, $facebook, $http, $window) {
     $facebook.logout().then(function(res){
       $scope.isLoggedIn = false;
     })
+  }
+
+  $scope.viewFull = function(videoID, instrument){
+    $scope.oneVideo = true;
+    $facebook.api("/"+ videoID +"?fields=comments{from,attachment,id,message,created_time},from,description,updated_time,permalink_url,length,picture,title").then(
+            function(res){
+              res.instrument = idDict[instrument]
+              res.realtime = new Date(res.updated_time)
+              res.updated_time = new Date(res.updated_time).getTime()
+              $scope.mainVideo = res;
+            })
   }
 
   

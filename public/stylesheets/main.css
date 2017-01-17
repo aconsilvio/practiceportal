@@ -1,19 +1,125 @@
+@font-face {
+  font-family: 'CooperHewittBold';
+  src: url('CooperHewitt-Bold-webfont.eot'); /* IE9 Compat Modes */
+  src: url('CooperHewitt-Bold-webfont.eot?#iefix') format('embedded-opentype'), 
+       url('CooperHewitt-Bold.otf'),
+       url('CooperHewitt-Bold-webfont.woff2') format('woff2'), 
+       url('CooperHewitt-Bold-webfont.woff') format('woff'), 
+       url('CooperHewitt-Bold-webfont.ttf')  format('truetype'), 
+       url('CooperHewitt-Bold-webfont.svg#svgFontName') format('svg'); /* Legacy iOS */
+}
+
+
+body{
+	font-family: "CooperHewittBold";
+	margin: 0;
+}
+
 .container {
   display: flex; /* or inline-flex */
   flex-wrap: wrap;
   justify-content: center;
-  padding-left: 1em;
-  padding-right: 1em;
+  margin-left: 5em;
+  margin-right: 5em;
 }
 
 .videoDiv{
-	padding: 2.5em
+	padding: 1em;
+	margin: 1em;
+	background-color: #eee;
+	max-width: 500px;
 
 }
 
 .bottom{
 	display: flex;
 	justify-content: center;
-	padding-left: 1em;
- 	padding-right: 1em;
+
 }
+
+.header {
+	background-color: #ffffff;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	height: 3.5em;
+	padding-left: 5em;
+ 	padding-right: 5em;
+ 	border-bottom: 1px solid #d7d7d7;
+}
+
+.flex-container{
+	display: flex;
+	flex-direction: column;
+	margin: 0;
+	padding: 0;
+}
+
+.header-links{
+	color: #8e8e8e;
+	margin-left: 2em;
+	text-decoration: none;
+}
+
+.instrument-links{
+	color: #8e8e8e;
+	margin-left: 2em;
+	padding: 1.25em;
+	text-decoration: none;
+
+}
+
+.instrument-links:hover{
+	background-color: #46328c;
+	color: #ffffff;
+	text-decoration: none;
+}
+
+.instrument-links:focus{
+	background-color: #46328c;
+	color: #ffffff;
+	text-decoration: none;
+	border-bottom: 1px solid #46328c;
+}
+
+.left-header, .right-header{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.searchbar{
+	color: #acacac;
+	border: 1px solid #acacac;
+	background-color: #f7f7f7;
+	font-family: "CooperHewittBold";
+	text-align: center;
+	width: 12em;
+	font-size: 1em;
+	height: 2em;
+}
+
+.instrument-nav{
+	display: flex;
+	flex-direction: row;
+	background-color: #46328c;
+	color: #ffffff;
+	height: 2em;
+	align-items: center;
+	padding-left: 4em;
+	padding-right: 2em;
+}
+
+.instrument-nav a{
+	text-decoration: none;
+	color: #ffffff;
+	margin-right: 1em;
+}
+
+.instrument-nav a:hover{
+	text-decoration: none;
+	color: #d7d7d7;
+	margin-right: 1em;
+}
+

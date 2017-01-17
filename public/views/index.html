@@ -28,6 +28,25 @@
 </head>
 
 <body ng-controller="DemoCtrl">
+<div class="flex-container">
+      <div class="header">
+      <div class="left-header">
+      <a href="#"><img src="../images/pplogo.png" ng-click="getAllVideos()"></a>
+      <div class="instrument-button">
+        <a href="#" class="instrument-links" ng-click="show = true" >instruments</a>
+      </div>
+
+             </div>
+             <div class="right-header">      
+             <label><input ng-model="searchText" placeholder="search" class="searchbar"></label>
+             <a href="#" ng-show="isLoggedIn" ng-click="logout()" class="header-links">log out</a>
+             </div>
+      </div>
+       <div ng-show="show" class="instrument-nav">
+       <div ng-repeat="instrument in groupInstruments">
+                <a href="#" ng-click="setInstrument(instrument); show=false">{{instrument}}</a>
+                </div>
+        </div>
         <div class="container">
             <!-- <div class="flex-item" ng-repeat="content in feed">
               <iframe src =
@@ -38,25 +57,31 @@
                <button ng-click = "login()">Log In</button>
 
              </div>
-             <button ng-show="isLoggedIn" ng-click="logout()">Log Out</button>
-             <button ng-click="getNewFunc()">get new videos</button>
-             <button ng-click="getAllVideos()">all</button>
-             <div ng-repeat="instrument in groupInstruments">
-                <button ng-click="setInstrument(instrument)">{{instrument}}</button>
-             </div>
-             <label>Search: <input ng-model="searchText"></label>
+             
+           
+              <div class="videoDiv" ng-repeat="content in videoFeed | filter:searchText |limitTo:numVideos" ng-show="!oneVideo">
+              <iframe src="https://www.facebook.com/video/embed?video_id={{content.id}}" frameborder="0" width="500" height="320"></iframe>
+              <h2>{{content.from.name}}</h2>
+              {{content.description}}
 
-              <div class="videoDiv" ng-repeat="content in videoFeed | filter:searchText |limitTo:numVideos">
-              <iframe src="https://www.facebook.com/video/embed?video_id={{content.id}}" frameborder="0"></iframe>
-
-              
+              <button ng-click="viewFull(content.id, content.instrument)">View Full Post</button>
+              </div>
+              <div ng-show="oneVideo">
+                <iframe src="https://www.facebook.com/video/embed?video_id={{mainVideo.id}}" frameborder="0" width="500" height="320"></iframe>
+                <h2>{{mainVideo.from.name}}</h2>
+                <p>{{mainVideo.description}}</p>
+                <hr>
+                <div ng-repeat="comment in mainVideo.comments.data">
+                {{comment.message}} - {{comment.from.name}}
+                </div>
               </div>
 
         </div>
         <div class="bottom">
-          <button ng-click="numVideos = numVideos + 6">Load more</button>
+          <button ng-click="numVideos = numVideos + 4" ng-hide="oneVideo">Load more</button>
         <div id="fb-root"></div>
          
+        </div>
         </div>
     </body>
 </html>
