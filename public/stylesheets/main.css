@@ -36,10 +36,9 @@ body{
 }
 
 .videoDiv{
-	padding: 1em;
-	margin: 1em;
-	background-color: #eee;
-	max-width: 500px;
+	margin: .75em;
+	background-color: #fff;
+	max-width: 270px;
 
 }
 
@@ -171,7 +170,30 @@ h3{
 	padding: 0;
 }
 
+h2{
+	font-family: 'CooperHewittBold';
+	font-size: 1.3em;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	-webkit-line-clamp: 2;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	text-overflow: ellipsis;
+	color: #000;
+}
+
 .footer-right{
 	display: flex;
+}
+
+.videoText{
+	padding-left: 1em;
+	padding-right: 1em;
+	padding-bottom: 1em;
+	padding-top: .7em;
+	font-family: 'CooperHewittBook';
+	font-size: .8em;
+	color:#8e8e8e;
 }
 

@@ -27,12 +27,14 @@ angular.module('practicePortal', ['ngFacebook'])
 
 var DemoCtrl = function ($scope, $facebook, $http, $window) {
   var feed = [];
-  var numVideos = 8;
+  var numVideos = 12;
   $scope.numVideos = numVideos;
   $scope.isLoggedIn = false;
   $scope.navInstrument = "instruments";
-  var groupIDs = ["687498148076618", "222774521466864", "1517819058276334", "158881161246610", "1144863825582537", "1137083516407421", "363584057367097", "353600324976899", "1230747207018937", "224802994614669", "1435519730079849", "760242687459625", "1032810963489791", "1627655720873882", "1631363607173492", "205198266611379", "661301877370767", "1115432718579904"]
-  $scope.groupInstruments = ["voice", "tuba", "sax", "oboe", "trombome", "bassoon", "clarinet", "guitar", "piano", "flute", "viola", "cello", "bass", "precussion", "trumpet", "french horn", "violin", "sister"]
+  var groupIDs = ["158881161246610"]
+  $scope.groupInstruments = ["oboe"]
+  // var groupIDs = ["687498148076618", "222774521466864", "1517819058276334", "158881161246610", "1144863825582537", "1137083516407421", "363584057367097", "353600324976899", "1230747207018937", "224802994614669", "1435519730079849", "760242687459625", "1032810963489791", "1627655720873882", "1631363607173492", "205198266611379", "661301877370767", "1115432718579904"]
+  // $scope.groupInstruments = ["voice", "tuba", "sax", "oboe", "trombome", "bassoon", "clarinet", "guitar", "piano", "flute", "viola", "cello", "bass", "precussion", "trumpet", "french horn", "violin", "sister"]
   function toObject(names, values) {
     var result = {};
     for (var i = 0; i < names.length; i++)
@@ -44,6 +46,7 @@ var DemoCtrl = function ($scope, $facebook, $http, $window) {
   var nameDict = toObject($scope.groupInstruments, groupIDs);
   
   function getVideos(groupID){
+    var currentTime = new Date().getTime();
     $facebook.api("/"+ groupID + "/videos").then( 
       function(response) {
         $scope.feedRaw = response;
@@ -51,8 +54,44 @@ var DemoCtrl = function ($scope, $facebook, $http, $window) {
           $facebook.api("/"+ $scope.feedRaw.data[i].id +"?fields=comments{from,attachment,id,message,created_time},from,description,updated_time,permalink_url,length,picture,title").then(
             function(res){
               res.instrument = idDict[groupID]
-              res.realtime = new Date(res.updated_time)
-              res.updated_time = new Date(res.updated_time).getTime()
+              res.realtime = res.updated_time
+              res.updated_time = new Date(res.updated_time).getTime();
+              
+              // time difference in ms
+              var timeDiff = currentTime - res.updated_time;
+              // strip the ms
+              timeDiff /= 1000;
+
+              // get seconds (Original had 'round' which incorrectly counts 0:28, 0:29, 1:30 ... 1:59, 1:0)
+              var seconds = Math.round(timeDiff % 60);
+
+              // remove seconds from the date
+              timeDiff = Math.floor(timeDiff / 60);
+
+              // get minutes
+              var minutes = Math.round(timeDiff % 60);
+
+              // remove minutes from the date
+              timeDiff = Math.floor(timeDiff / 60);
+
+              // get hours
+              var hours = Math.round(timeDiff % 24);
+
+              // remove hours from the date
+              timeDiff = Math.floor(timeDiff / 24);
+
+              // the rest of timeDiff is number of days
+              var days = timeDiff ;
+
+              if(days != 0){  //if more than 0 days have passed
+                res.timeSince = days + " days ago";
+              } else if(hours != 0){ //if more than 0 hours have passed
+                res.timeSince = hours + " hours ago"
+              } else if(minutes != 0){
+                res.timeSince = minutes + " minutes ago"
+              } else{
+                res.timeSince = seconds + " seconds ago"
+             }
               feed.push(res);
             })
         }
@@ -63,14 +102,16 @@ var DemoCtrl = function ($scope, $facebook, $http, $window) {
   }
 
   function refresh() {
+    $scope.oneVideo = false;
     for(var key in idDict){
       getVideos(key)
     }
-    $scope.oneVideo = false;
+    setVideos()
+  }
+
+  function setVideos(){
     $scope.videoFeed = feed.sort(function(a,b){
-      // a = parseInt(a.updated_time)
-      // b = parseInt(b.updated_time)
-      return b-a
+      return parseInt(b.updated_time) - parseInt(a.updated_time)
     });
 
   }

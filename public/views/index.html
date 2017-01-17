@@ -56,16 +56,19 @@
              
            
               <div class="videoDiv" ng-repeat="content in videoFeed | filter:searchText |limitTo:numVideos" ng-show="!oneVideo">
-              <iframe src="https://www.facebook.com/video/embed?video_id={{content.id}}" frameborder="0" width="500" height="320"></iframe>
-              <h2>{{content.from.name}}</h2>
-              {{content.description}}
-
+              <iframe src="https://www.facebook.com/video/embed?video_id={{content.id}}" frameborder="0" width="270" height="180"></iframe>
+              <div class = "videoText">
+              <h2>{{content.description}}</h2>
+              {{content.from.name}} | {{content.timeSince}}
               <button ng-click="viewFull(content.id, content.instrument)">View Full Post</button>
+              </div>
+
+              
               </div>
               <div ng-show="oneVideo">
                 <iframe src="https://www.facebook.com/video/embed?video_id={{mainVideo.id}}" frameborder="0" width="500" height="320"></iframe>
-                <h2>{{mainVideo.from.name}}</h2>
-                <p>{{mainVideo.description}}</p>
+                <h2>{{mainVideo.description}}</h2>
+                <p>{{mainVideo.from.name}}</p>
                 <hr>
                 <div ng-repeat="comment in mainVideo.comments.data">
                 {{comment.message}} - {{comment.from.name}}
