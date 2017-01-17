@@ -55,7 +55,7 @@
              </div>
              
            
-              <div class="videoDiv" ng-repeat="content in videoFeed | filter:searchText |limitTo:numVideos" ng-show="!oneVideo">
+              <div class="videoDiv" ng-repeat="content in videoFeed | filter:searchText | orderBy:'-realtime' |limitTo:numVideos " ng-show="!oneVideo">
               <iframe src="https://www.facebook.com/video/embed?video_id={{content.id}}" frameborder="0" width="270" height="180"></iframe>
               <div class = "videoText">
               <h2>{{content.description}}</h2>
