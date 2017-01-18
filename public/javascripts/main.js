@@ -231,7 +231,6 @@ var DemoCtrl = function ($scope, $facebook, $http, $window) {
   
   $http.get("/")
     .success(function(data){
-      refresh();
     })
     .error(function(data){
       console.log("err")
