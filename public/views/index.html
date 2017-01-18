@@ -61,23 +61,23 @@
         </div>
 
         <div ng-show="showLiveLinks" class="live-container">
-          <a href="https://www.facebook.com/groups/353600324976899/" target="blank">guitar</a>
-          <a href="https://www.facebook.com/groups/222774521466864/" target="blank">tuba</a>
-          <a href="https://www.facebook.com/groups/158881161246610/" target="blank">oboe</a>
-          <a href="https://www.facebook.com/groups/363584057367097/" target="blank">clarinet</a>
-          <a href="https://www.facebook.com/groups/1144863825582537/" target="blank">trombone</a>
-          <a href="https://www.facebook.com/groups/1517819058276334/" target="blank">sax</a>
-          <a href="https://www.facebook.com/groups/1137083516407421/" target="blank">bassoon</a>
-          <a href="https://www.facebook.com/groups/Practiceportalvln/" target="blank">violin</a>
-          <a href="https://www.facebook.com/groups/1230747207018937/" target="blank">piano</a>
-          <a href="https://www.facebook.com/groups/224802994614669/" target="blank">flute</a>
-          <a href="https://www.facebook.com/groups/1435519730079849/" target="blank">viola</a>
-          <a href="https://www.facebook.com/groups/760242687459625/" target="blank">cello</a>
-          <a href="https://www.facebook.com/groups/1032810963489791/" target="blank">bass</a>
-          <a href="https://www.facebook.com/groups/1627655720873882/" target="blank">percussion</a>
-          <a href="https://www.facebook.com/groups/1631363607173492/" target="blank">trumpet</a>
-          <a href="https://www.facebook.com/groups/687498148076618" target="blank">voice</a>
-          <a href="https://www.facebook.com/groups/205198266611379/" target="blank">french horn</a>
+          <a ng-click="showLiveLinks = false" href="https://www.facebook.com/groups/353600324976899/" target="_blank">guitar</a>
+          <a ng-click="showLiveLinks = false" href="https://www.facebook.com/groups/222774521466864/" target="_blank">tuba</a>
+          <a ng-click="showLiveLinks = false" href="https://www.facebook.com/groups/158881161246610/" target="_blank">oboe</a>
+          <a ng-click="showLiveLinks = false" href="https://www.facebook.com/groups/363584057367097/" target="_blank">clarinet</a>
+          <a ng-click="showLiveLinks = false" href="https://www.facebook.com/groups/1144863825582537/" target="_blank">trombone</a>
+          <a ng-click="showLiveLinks = false" href="https://www.facebook.com/groups/1517819058276334/" target="_blank">sax</a>
+          <a ng-click="showLiveLinks = false" href="https://www.facebook.com/groups/1137083516407421/" target="_blank">bassoon</a>
+          <a ng-click="showLiveLinks = false" href="https://www.facebook.com/groups/Practiceportalvln/" target="_blank">violin</a>
+          <a ng-click="showLiveLinks = false" href="https://www.facebook.com/groups/1230747207018937/" target="_blank">piano</a>
+          <a ng-click="showLiveLinks = false" href="https://www.facebook.com/groups/224802994614669/" target="_blank">flute</a>
+          <a ng-click="showLiveLinks = false" href="https://www.facebook.com/groups/1435519730079849/" target="_blank">viola</a>
+          <a ng-click="showLiveLinks = false" href="https://www.facebook.com/groups/760242687459625/" target="_blank">cello</a>
+          <a ng-click="showLiveLinks = false" href="https://www.facebook.com/groups/1032810963489791/" target="_blank">bass</a>
+          <a ng-click="showLiveLinks = false" href="https://www.facebook.com/groups/1627655720873882/" target="_blank">percussion</a>
+          <a ng-click="showLiveLinks = false" href="https://www.facebook.com/groups/1631363607173492/" target="_blank">trumpet</a>
+          <a ng-click="showLiveLinks = false" href="https://www.facebook.com/groups/687498148076618" target="_blank">voice</a>
+          <a ng-click="showLiveLinks = false" href="https://www.facebook.com/groups/205198266611379/" target="_blank">french horn</a>
         </div>
         <div class="mainPage">
           <span class="videoHeaders" ng-hide="oneVideo">recent videos</span>
@@ -101,7 +101,7 @@
                       <span>{{mainVideo.description}}</span>
                       <p>Posted by {{mainVideo.from.name}}</p>
                       <div>
-                        <a class ="video-button" href="https://www.facebook.com/{{mainVideo.id}}" target="blank">add your comments on facebook</a>
+                        <a class ="video-button" href="https://www.facebook.com/{{mainVideo.id}}" target="_blank">add your comments on facebook</a>
                       </div>
                      </div>
                     <div class="right-half split">
@@ -115,7 +115,7 @@
                       </div>
                       <div ng-show="!comments" class="comment-container-outer">
                       <div class="comment-container-inner">
-                        <a href="https://www.facebook.com/{{mainVideo.id}}" target="blank" class="comment-button">Add a comment to this video</a>
+                        <a href="https://www.facebook.com/{{mainVideo.id}}" target="_blank" class="comment-button">Add a comment to this video</a>
                         or 
                         <a href="" class="comment-button" ng-click="setInstrument(navInstrument)">check out some other {{navInstrument}} videos</a>
                         </div>
@@ -158,11 +158,11 @@
             <div class="about-text">
               <h3>follow us</h3>
               <div class="follow-container">
-              <a href="https://www.facebook.com/practiceportal/" target="blank"><img src="../images/fb.png" class = "icon"></a> 
-              <a href="https://www.facebook.com/practiceportal/" target="blank">/practiceportal </a></div>
+              <a href="https://www.facebook.com/practiceportal/" target="_blank"><img src="../images/fb.png" class = "icon"></a> 
+              <a href="https://www.facebook.com/practiceportal/" target="_blank">/practiceportal </a></div>
               <div class="follow-container">
-              <a href="https://www.instagram.com/practiceportal/" target="blank"><img src="../images/insta.png" class="icon"></a>
-              <a href="https://www.instagram.com/practiceportal/" target="blank"> /practiceportal </a>
+              <a href="https://www.instagram.com/practiceportal/" target="_blank"><img src="../images/insta.png" class="icon"></a>
+              <a href="https://www.instagram.com/practiceportal/" target="_blank"> /practiceportal </a>
               </div>
             </div>
             <div class="about-text">
