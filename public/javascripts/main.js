@@ -32,10 +32,11 @@ var DemoCtrl = function ($scope, $facebook, $http, $window) {
   $scope.isLoggedIn = false;
   $scope.navInstrument = "instruments";
   $scope.showLiveLinks = false;
+  $scope.mainVideo = {}
   // var groupIDs = ["158881161246610"]
   // $scope.groupInstruments = ["oboe"]
-  $scope.groupIDs = ["687498148076618", "222774521466864", "1517819058276334", "158881161246610", "1144863825582537", "1137083516407421", "363584057367097", "353600324976899", "1230747207018937", "224802994614669", "1435519730079849", "760242687459625", "1032810963489791", "1627655720873882", "1631363607173492", "205198266611379", "661301877370767"]
-  $scope.groupInstruments = ["voice", "tuba", "sax", "oboe", "trombome", "bassoon", "clarinet", "guitar", "piano", "flute", "viola", "cello", "bass", "precussion", "trumpet", "french horn", "violin"]
+  $scope.groupIDs = ["687498148076618", "222774521466864", "1517819058276334", "158881161246610", "1144863825582537", "1137083516407421", "363584057367097", "353600324976899", "1230747207018937", "224802994614669", "1435519730079849", "760242687459625", "1032810963489791", "1627655720873882", "1631363607173492", "205198266611379", "661301877370767", "1115432718579904"]
+  $scope.groupInstruments = ["voice", "tuba", "sax", "oboe", "trombome", "bassoon", "clarinet", "guitar", "piano", "flute", "viola", "cello", "bass", "precussion", "trumpet", "french horn", "violin", 'sister']
   function toObject(names, values) {
     var result = {};
     for (var i = 0; i < names.length; i++)
@@ -114,7 +115,7 @@ var DemoCtrl = function ($scope, $facebook, $http, $window) {
   }
 
   function refresh() {
-    $scope.oneVideo = false;
+    clearOneVideo();
     for(var key in idDict){
       getVideos(key)
     }
@@ -126,17 +127,22 @@ var DemoCtrl = function ($scope, $facebook, $http, $window) {
 
   }
 
+  function clearOneVideo(){
+    $scope.mainVideo = {};
+    $scope.oneVideo = false
+  }
+
   $scope.getAllVideos = function(){
+    clearOneVideo();
     $scope.navInstrument = "instruments"
-    $scope.oneVideo = false;
     $scope.numVideos = numVideos;
     feed = [];
     refresh()
   }
 
   $scope.setInstrument = function(instrument){
+    clearOneVideo();
     $scope.show = false;
-    $scope.oneVideo = false;
     $scope.numVideos = numVideos;
     $scope.navInstrument = instrument;
     $scope.currentInstrument = instrument;
@@ -160,11 +166,21 @@ var DemoCtrl = function ($scope, $facebook, $http, $window) {
 
   $scope.viewFull = function(videoID, instrument){
     $scope.oneVideo = true;
-    $facebook.api("/"+ videoID +"?fields=comments{from,attachment,id,message,created_time},from,description,updated_time,permalink_url,length,picture,title").then(
+    $facebook.api("/"+ videoID +"?fields=comments{from,attachment,id,message,created_time,live_broadcast_timestamp},from,description,updated_time,permalink_url,length,picture,title").then(
             function(res){
-              res.instrument = idDict[instrument]
-              res.realtime = new Date(res.updated_time)
-              res.updated_time = new Date(res.updated_time).getTime()
+              res.instrument = instrument;
+              if(res.comments != undefined){
+                for(comment in res.comments.data){
+                  res.comments.data[comment].showTime = (res.comments.data[comment].live_broadcast_timestamp/60).toFixed(2).toString().replace(".", ":");
+                  if (res.comments.data[comment].showTime == 'NaN'){
+                    res.comments.data[comment].showTime = '0:00';
+                    res.comments.data[comment].live_broadcast_timestamp = 0;
+                  }
+                  // res.comments.data[comment].live_broadcast_timestamp = live_broadcast_timestamp/60;
+                }
+              }
+              res.realtime = new Date(res.updated_time);
+              res.updated_time = new Date(res.updated_time).getTime();
               $scope.mainVideo = res;
             })
   }

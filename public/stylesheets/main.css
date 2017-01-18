@@ -144,10 +144,6 @@ body{
 	border-top: 1px solid #d7d7d7;
 }
 
-.footer img{
-	max-width: 100%;
-}
-
 .footer-left{
 	display: flex;
 }
@@ -160,6 +156,17 @@ body{
 	margin-left: 2em;
 	font-size: .8em;
 }
+
+.about-text a{
+	color: #8e8e8e;
+	text-decoration: none;
+}
+
+.about-text a:hover{
+	color: #46328c;
+	text-decoration: none;
+}
+
 
 h3{
 	color: #46328c;
@@ -339,9 +346,55 @@ h2{
 	text-decoration: none;
 }
 
+.follow-container{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.follow-container a{
+	text-decoration: none;
+	color: #8e8e8e;
+}
+
+.follow-container a:hover{
+	color: #46328c;
+}
+
+.icon{
+	max-width: 1.5em;
+	padding-top: .3em;
+	padding-right: .5em;
+}
+
 h1{
 	color: #46328c;
 	margin: 0;
 	font-family: 'CooperHewittBold'; 
 	padding-bottom: .6em;
+}
+
+.comment-container{
+	display: flex;
+	flex-direction: column;
+	padding-right: 10em;
+	padding-left: 10em;
+}
+
+.comment-top{
+	display: flex;
+	justify-content: flex-start;
+	color: #46328c;
+	font-family: 'CooperHewittBook'
+
+}
+
+.comment-top span{
+	font-family: 'CooperHewittBook';
+	color: #8e8e8e;
+	padding-left: 1em;
+}
+
+.comment-bottom{
+	font-family: 'CooperHewittBook'
 }

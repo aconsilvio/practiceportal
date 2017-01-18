@@ -12,9 +12,7 @@
     <title>Practice Portal</title>
 
     <!-- SCROLLS -->
-    <link rel="stylesheet" href="stylesheets/bootstrap.min.css"><!-- load bootstrap -->
     <link rel="stylesheet" type="text/css" href="stylesheets/main.css">
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Bitter">
     <!-- <link href="/stylesheets/simple-sidebar.css" rel="stylesheet"> -->
 
     <!-- SPELLS -->
@@ -82,7 +80,7 @@
           <a href="https://www.facebook.com/groups/205198266611379/" target="blank">french horn</a>
         </div>
         <div class="mainPage">
-          <span class="videoHeaders">recent videos</span>
+          <span class="videoHeaders" ng-hide="oneVideo">recent videos</span>
             <div class="container">
                  
                   <div ng-click="viewFull(content.id, content.instrument)" class="videoDiv" ng-repeat="content in videoFeed | filter:searchText | orderBy:'-realtime' |limitTo:numVideos " ng-show="!oneVideo">
@@ -101,14 +99,22 @@
                     <h2>{{mainVideo.description}}</h2>
                     <p>{{mainVideo.from.name}}</p>
                     <hr>
-                    <div ng-repeat="comment in mainVideo.comments.data">
-                    {{comment.message}} - {{comment.from.name}}
+                    <div ng-repeat="comment in mainVideo.comments.data | orderBy:'-live_broadcast_timestamp':'reverse'">
+                    <div class="comment-container">
+                      <div class="comment-top">
+                         {{comment.from.name}} <span>{{comment.showTime}}</span>
+                      </div>
+                      <div class="comment-bottom">
+                        {{comment.message}}
+                      </div>
+                      <hr>
+                    </div>
                     </div>
                   </div>
 
             </div>
-        <div class="bottom" ng-click="numVideos = numVideos + 8">
-          <a href="" ng-click="numVideos = numVideos + 8" ng-hide="oneVideo" class="loading">load more</a>
+        <div class="bottom" ng-click="numVideos = numVideos + 8"  ng-hide="oneVideo">
+          <a href="" ng-click="numVideos = numVideos + 8" class="loading">load more</a>
           <svg href="" fill="#46328c" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
             <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/>
             <path d="M0 0h24v24H0z" fill="none"/>
@@ -130,13 +136,17 @@
           <div class="footer-right">
             <div class="about-text">
               <h3>follow us</h3>
-              fb here <br>
-              twitter here
+              <div class="follow-container">
+              <a href="https://www.facebook.com/practiceportal/" target="blank"><img src="../images/fb.png" class = "icon"></a> 
+              <a href="https://www.facebook.com/practiceportal/" target="blank">/practiceportal </a></div>
+              <div class="follow-container">
+              <a href="https://www.instagram.com/practiceportal/" target="blank"><img src="../images/insta.png" class="icon"></a>
+              <a href="https://www.facebook.com/practiceportal/" target="blank"> /practiceportal </a>
+              </div>
             </div>
             <div class="about-text">
-              <h3>follow us</h3>
-              fb here <br>
-              twitter here
+              <h3>contact us</h3>
+              <a href="mailto:team@practiceportal.tv">team@practiceportal.tv</a>
             </div>
           </div>
         </div>
