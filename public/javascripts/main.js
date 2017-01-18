@@ -35,8 +35,42 @@ var DemoCtrl = function ($scope, $facebook, $http, $window) {
   $scope.mainVideo = {}
   // var groupIDs = ["158881161246610"]
   // $scope.groupInstruments = ["oboe"]
-  $scope.groupIDs = ["687498148076618", "222774521466864", "1517819058276334", "158881161246610", "1144863825582537", "1137083516407421", "363584057367097", "353600324976899", "1230747207018937", "224802994614669", "1435519730079849", "760242687459625", "1032810963489791", "1627655720873882", "1631363607173492", "205198266611379", "661301877370767"]
-  $scope.groupInstruments = ["voice", "tuba", "saxophone", "oboe", "trombone", "bassoon", "clarinet", "guitar", "piano", "flute", "viola", "cello", "bass", "precussion", "trumpet", "french horn", "violin"]
+  $scope.groupIDs = [ 
+  "224802994614669", 
+  "158881161246610", 
+  "363584057367097", 
+  "1137083516407421", 
+  "1517819058276334", 
+  "205198266611379", 
+  "1627655720873882", 
+  "222774521466864", 
+  "1032810963489791", 
+  "1631363607173492", 
+  "661301877370767",
+  "1230747207018937",
+  "1435519730079849", 
+  "760242687459625", 
+  "1144863825582537", 
+  "353600324976899", 
+  "687498148076618"]
+  $scope.groupInstruments = [ 
+  "flute", 
+  "oboe", 
+  "clarinet",
+  "bassoon",  
+  "saxophone",
+  "french horn",  
+  "trumpet", 
+  "trombone", 
+  "tuba", 
+  "precussion",
+  "violin",
+  "viola", 
+  "cello",  
+  "double bass",
+  "guitar", 
+  "piano",  
+  "voice"]
   function toObject(names, values) {
     var result = {};
     for (var i = 0; i < names.length; i++)
