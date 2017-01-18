@@ -64,6 +64,7 @@ body{
 	margin-left: 2em;
 	text-decoration: none;
 	letter-spacing: .05em;
+	margin-right: 2em;
 }
 
 .instrument-links{
@@ -196,7 +197,17 @@ h2{
 	margin: .75em;
 	background-color: #fff;
 	max-width: 16em;
+	box-shadow: 
+	-webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.6);
+	-moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.6);
+	box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.6)
 
+}
+
+.videoDiv:hover{
+	-webkit-box-shadow: 0px 0px 8px 1px rgba(0,0,0,0.6);
+	-moz-box-shadow: 0px 0px 8px 1px rgba(0,0,0,0.6);
+	box-shadow: 0px 0px 8px 1px rgba(0,0,0,0.6);
 }
 
 .videoText{
@@ -228,6 +239,7 @@ h2{
 	margin-top: 1em;
 	margin-bottom: 1em;
 	margin-left: 3em;
+	letter-spacing: .07em;
 
 }
 
@@ -236,11 +248,100 @@ h2{
 	padding-right: 6em;
 	padding-top: 1em;
 	padding-bottom: 2em;
-    background-color: #ebebeb
+    background-color: #ebebeb;
 }
 .loading{
 	color: #46328c;
 	font-family: 'CooperHewittBook';
 	text-decoration: none;
 	padding-top: 1em;
+}
+
+.login-container{
+	height: 100vh;
+	text-align: center;
+	background-image: url('../images/preview.jpg');
+	background-size: cover;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+
+.button{
+	color: #fff;
+	background-color: #46328c;
+	padding: 1em;
+	text-decoration: none;
+	border: 2px solid #46328c;
+	text-align: center;
+	letter-spacing: .07em;
+	font-family: 'CooperHewittBold';
+	margin-top: 1.5em;
+
+}
+
+.button:hover{
+	border: 2px solid #46328c;
+	color: #46328c;
+	background-color: #fff;
+}
+
+.small-container{
+	display: flex;
+	flex-direction: column;
+	background-color: #ebebeb;
+	padding: 2em;
+	border: 1px solid #d7d7d7;
+	font-size: .9em;
+	max-width: 15em;
+	font-family: 'CooperHewittBook'
+}
+
+.live-container{
+	display: flex;
+	flex-direction: column;
+	text-decoration: none;
+	background-color: #46328c;
+	max-width: 13em;
+	color: #fff;
+	right: 6em;
+    position: absolute;
+    margin-top: 3.5em;
+    padding: .4em;
+    z-index: 3;
+}
+.live-container a{
+	text-decoration: none;
+	color: #fff;
+}
+
+.live-container a:hover{
+	text-decoration: none;
+	background-color: #46328c;
+	color: #d7d7d7;
+}
+
+.live-button{
+	background-color: #46328c;
+	color: #fff;
+	text-decoration: none;
+	padding-top: 1.2em;
+	padding-bottom:1.2em; 
+	padding-left: 1.6em;
+	padding-right: 1.6em;
+	border-bottom: 1px solid #d7d7d7;
+}
+
+.live-button:hover{
+	background-color: #46328c;
+	color: #d7d7d7;
+	text-decoration: none;
+}
+
+h1{
+	color: #46328c;
+	margin: 0;
+	font-family: 'CooperHewittBold'; 
+	padding-bottom: .6em;
 }

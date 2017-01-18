@@ -28,7 +28,20 @@
 </head>
 
 <body ng-controller="DemoCtrl">
-<div class="flex-container">
+<div class="login-container" ng-show="!isLoggedIn">
+    <div class="small-container">
+    <h3>welcome to</h3>
+    <h1>practice portal</h1>
+    Practice Portal is an online community of musicians who share and improve their practice methods through live stream.
+              <br>
+              For musicians, By musicians.
+     <br>     
+      <a href="" ng-click = "login()" class="button">log in with facebook</a>
+  
+  </div>
+</div>
+
+<div class="flex-container" ng-show="isLoggedIn">
       <div class="header">
       <div class="left-header">
       <a href="#"><img src="../images/pplogo.png" ng-click="getAllVideos()"></a>
@@ -40,6 +53,7 @@
              <div class="right-header">      
              <label><input ng-model="searchText" placeholder="search" class="searchbar"></label>
              <a href="#" ng-show="isLoggedIn" ng-click="logout()" class="header-links">log out</a>
+             <a href="" class="live-button" ng-click="showLiveLinks = !showLiveLinks" style="position:relative"> go live </a>
              </div>
       </div>
        <div ng-show="show" class="instrument-nav">
@@ -47,14 +61,29 @@
                 <a href="#" ng-click="setInstrument(instrument)">{{instrument}}</a>
                 </div>
         </div>
+
+        <div ng-show="showLiveLinks" class="live-container">
+          <a href="https://www.facebook.com/groups/353600324976899/" target="blank">guitar</a>
+          <a href="https://www.facebook.com/groups/222774521466864/" target="blank">tuba</a>
+          <a href="https://www.facebook.com/groups/158881161246610/" target="blank">oboe</a>
+          <a href="https://www.facebook.com/groups/363584057367097/" target="blank">clarinet</a>
+          <a href="https://www.facebook.com/groups/1144863825582537/" target="blank">trombone</a>
+          <a href="https://www.facebook.com/groups/1517819058276334/" target="blank">sax</a>
+          <a href="https://www.facebook.com/groups/1137083516407421/" target="blank">bassoon</a>
+          <a href="https://www.facebook.com/groups/Practiceportalvln/" target="blank">violin</a>
+          <a href="https://www.facebook.com/groups/1230747207018937/" target="blank">piano</a>
+          <a href="https://www.facebook.com/groups/224802994614669/" target="blank">flute</a>
+          <a href="https://www.facebook.com/groups/1435519730079849/" target="blank">viola</a>
+          <a href="https://www.facebook.com/groups/760242687459625/" target="blank">cello</a>
+          <a href="https://www.facebook.com/groups/1032810963489791/" target="blank">bass</a>
+          <a href="https://www.facebook.com/groups/1627655720873882/" target="blank">percussion</a>
+          <a href="https://www.facebook.com/groups/1631363607173492/" target="blank">trumpet</a>
+          <a href="https://www.facebook.com/groups/687498148076618" target="blank">voice</a>
+          <a href="https://www.facebook.com/groups/205198266611379/" target="blank">french horn</a>
+        </div>
         <div class="mainPage">
           <span class="videoHeaders">recent videos</span>
             <div class="container">
-                 <div ng-show="!isLoggedIn">
-                   Please Log In to Facebook.
-                   <button ng-click = "login()">Log In</button>
-
-                 </div>
                  
                   <div ng-click="viewFull(content.id, content.instrument)" class="videoDiv" ng-repeat="content in videoFeed | filter:searchText | orderBy:'-realtime' |limitTo:numVideos " ng-show="!oneVideo">
                     <div id="videoLoad" ng-click="iframe=true"  style="background-image:url({{content.picture}}); background-size:cover; background-position:center">  
