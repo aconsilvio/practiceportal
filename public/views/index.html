@@ -94,23 +94,44 @@
                     </div>
                   </div>
 
-                  <div ng-show="oneVideo">
-                    <iframe src="https://www.facebook.com/video/embed?video_id={{mainVideo.id}}" frameborder="0" width="500" height="320"></iframe>
-                    <h2>{{mainVideo.description}}</h2>
-                    <p>{{mainVideo.from.name}}</p>
-                    <hr>
-                    <div ng-repeat="comment in mainVideo.comments.data | orderBy:'-live_broadcast_timestamp':'reverse'">
-                    <div class="comment-container">
+
+                <div class="video-page" ng-show="oneVideo">
+                    <div class="left-half split">
+                        <iframe src="https://www.facebook.com/video/embed?video_id={{mainVideo.id}}" frameborder="0"></iframe>
+                      <span>{{mainVideo.description}}</span>
+                      <p>Posted by {{mainVideo.from.name}}</p>
+                      <div>
+                        <a class ="video-button" href="https://www.facebook.com/{{mainVideo.id}}" target="blank">add your comments on facebook</a>
+                      </div>
+                     </div>
+                    <div class="right-half split">
+                      <div ng-repeat="comment in mainVideo.comments.data | orderBy:'-live_broadcast_timestamp':'reverse'" ng-show="comments">
                       <div class="comment-top">
-                         {{comment.from.name}} <span>{{comment.showTime}}</span>
+                        {{comment.from.name}} <span> {{comment.showTime}}</span>
                       </div>
                       <div class="comment-bottom">
-                        {{comment.message}}
+                      {{comment.message}}
                       </div>
-                      <hr>
-                    </div>
-                    </div>
+                      </div>
+                      <div ng-show="!comments" class="comment-container-outer">
+                      <div class="comment-container-inner">
+                        <a href="https://www.facebook.com/{{mainVideo.id}}" target="blank" class="comment-button">Add a comment to this video</a>
+                        or 
+                        <a href="" class="comment-button" ng-click="setInstrument(navInstrument)">check out some other {{navInstrument}} videos</a>
+                        </div>
+                      </div>
                   </div>
+                </div>
+
+<!--                   <div  class="video-page">
+                    <div class="video">
+                      
+                    </div>
+                    <div ng-repeat="comment in mainVideo.comments.data | orderBy:'-live_broadcast_timestamp':'reverse'" class="comment-container">
+                      
+                    </div>
+                  </div> -->
+                  
 
             </div>
         <div class="bottom" ng-click="numVideos = numVideos + 8"  ng-hide="oneVideo">

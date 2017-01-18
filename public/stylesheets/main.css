@@ -294,6 +294,60 @@ h2{
 	background-color: #fff;
 }
 
+.video-button{
+	color: #46328c;
+	background-color: #fff;
+	padding: 1em;
+	text-decoration: none;
+	border: 2px solid #fff;
+	text-align: center;
+	letter-spacing: .07em;
+	font-family: 'CooperHewittBold';
+	margin-top: 1.5em;
+
+}
+
+.video-button:hover{
+	border: 2px solid #fff;
+	color: #fff;
+	background-color: #46328c;
+}
+
+.comment-container-outer{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+}
+
+.comment-container-inner{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+}
+.comment-button{
+	padding: 1em;
+	color: #8e8e8e;
+	font-family: 'CooperHewittBook';
+	text-decoration: none;
+	text-align: center;
+	letter-spacing: .07em;
+}
+
+.comment-button:hover{
+	padding: 1em;
+	color: #46328c;
+	font-family: 'CooperHewittBold';
+	text-decoration: none;
+	text-align: center;
+	letter-spacing: .07em;
+}
+
+
 .small-container{
 	display: flex;
 	flex-direction: column;
@@ -374,12 +428,6 @@ h1{
 	padding-bottom: .6em;
 }
 
-.comment-container{
-	display: flex;
-	flex-direction: column;
-	padding-right: 10em;
-	padding-left: 10em;
-}
 
 .comment-top{
 	display: flex;
@@ -393,8 +441,79 @@ h1{
 	font-family: 'CooperHewittBook';
 	color: #8e8e8e;
 	padding-left: 1em;
+	font-size: .8em;
 }
 
 .comment-bottom{
-	font-family: 'CooperHewittBook'
+	font-family: 'CooperHewittBook';
+	font-size: .8em;
+	padding-bottom: 1.2em;
+}
+.video{
+	width: 50%;
+}
+
+.video-page{
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  height: 80vh;
+  width: 100%;
+  padding-bottom: 1em;
+}
+
+.split {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 80vh;
+  width: 100%;
+  overflow-y:scroll;
+}
+
+.left-half {
+  background-color: #46328c;
+  flex: 1;
+  padding: 1rem;
+  text-align: center;
+  color: #fff;
+  font-family: 'CooperHewittBook';
+  font-size: .9em;
+}
+
+.left-half span{
+	color: #fff;
+	font-family: 'CooperHewittBold';
+	font-size: 1.3em;
+	letter-spacing: .04em;
+}
+
+.left-half p{
+	margin: 0;
+	padding: 0;
+	padding-bottom: 2em;
+}
+
+.right-half {
+  background-color: #fff;
+  flex: 1;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  max-height: 80vh;
+  overflow-y:scroll;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+iframe{
+	width: 100%;
+	height: 70%;
+	padding-bottom: 1em;
 }
