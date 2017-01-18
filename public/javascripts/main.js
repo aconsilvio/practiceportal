@@ -63,7 +63,7 @@ var DemoCtrl = function ($scope, $facebook, $http, $window) {
   "trumpet", 
   "trombone", 
   "tuba", 
-  "precussion",
+  "percussion",
   "violin",
   "viola", 
   "cello",  
