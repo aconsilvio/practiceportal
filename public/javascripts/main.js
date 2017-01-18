@@ -134,6 +134,8 @@ var DemoCtrl = function ($scope, $facebook, $http, $window) {
 
   $scope.getAllVideos = function(){
     clearOneVideo();
+    $scope.searchText = "";
+    $scope.showLiveLinks = false;
     $scope.navInstrument = "instruments"
     $scope.numVideos = numVideos;
     feed = [];
@@ -142,6 +144,8 @@ var DemoCtrl = function ($scope, $facebook, $http, $window) {
 
   $scope.setInstrument = function(instrument){
     clearOneVideo();
+    $scope.searchText = "";
+    $scope.showLiveLinks = false;
     $scope.show = false;
     $scope.numVideos = numVideos;
     $scope.navInstrument = instrument;
@@ -167,6 +171,8 @@ var DemoCtrl = function ($scope, $facebook, $http, $window) {
   $scope.viewFull = function(videoID, instrument){
     $scope.oneVideo = true;
     $scope.navInstrument = instrument;
+    $scope.showLiveLinks = false;
+    $scope.searchText = "";
     $facebook.api("/"+ videoID +"?fields=comments{from,attachment,id,message,created_time,live_broadcast_timestamp},from,description,updated_time,permalink_url,length,picture,title").then(
             function(res){
               res.instrument = instrument;
