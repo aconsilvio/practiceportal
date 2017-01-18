@@ -42,9 +42,9 @@ app.get('/', function(req, res){
 // app.post('/api/header/:title', wiki.updateWikiPOST);
 // app.post('/api/createNew', wiki.saveNewWikiPOST);
 // app.get('*', wiki.catchAnything);
-var mongoURI = process.env.MONGO_URI || "mongodb://localhost/test";
-console.log(mongoURI)
-mongoose.connect(mongoURI);
+// var mongoURI = process.env.MONGO_URI || "mongodb://localhost/test";
+// console.log(mongoURI)
+// mongoose.connect(mongoURI);
 
 //port set up
 
