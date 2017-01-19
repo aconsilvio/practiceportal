@@ -479,9 +479,10 @@ h2{
 	color: #fff;
 	right: 6em;
     position: absolute;
-    margin-top: 3.5em;
-    padding: .4em;
+/*    margin-top: 3.5em;
+*/    padding: .4em;
     z-index: 3;
+    top: 3.5em;
 }
 .live-container a{
 	text-decoration: none;
@@ -648,6 +649,8 @@ h1{
   display: flex;
   max-height: 80vh;
   overflow-y:scroll;
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch;
   align-items: flex-start;
   justify-content: flex-start;
 }
