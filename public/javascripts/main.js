@@ -90,8 +90,11 @@ var DemoCtrl = function ($scope, $facebook, $http, $window) {
           $facebook.api("/"+ $scope.feedRaw.data[i].id +"?fields=comments{from,attachment,id,message,created_time},from,description,updated_time,permalink_url,length,picture,title").then(
             function(res){
               res.instrument = idDict[groupID]
-              res.realtime = res.updated_time
-              res.updated_time = new Date(res.updated_time).getTime();
+              res.realtime = res.updated_time;
+              var a = res.updated_time.split(/[^0-9]/);
+              res.updated_time = new Date (a[0],a[1]-1,a[2],a[3],a[4],a[5]);
+              console.log(res.updated_time);
+
               res.length = (res.length/60).toFixed(2).toString().replace(".", ":");
               // time difference in ms
               var timeDiff = currentTime - res.updated_time;
