@@ -105,7 +105,7 @@
                       </div>
                      </div>
                     <div class="right-half split">
-                      <div ng-repeat="comment in mainVideo.comments.data | orderBy:'-live_broadcast_timestamp':'reverse'" ng-show="comments">
+                      <div ng-repeat="comment in mainVideo.comments.data | orderBy:'-live_broadcast_timestamp':'reverse'" ng-show="comments" class="comment-container">
                       <div class="comment-top">
                         {{comment.from.name}} <span> {{comment.showTime}}</span>
                       </div>
